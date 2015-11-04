@@ -1,0 +1,9 @@
+TAG: doi_serv-6-0-1-1
+TAG: doi_dev-6-0-1-2
+TAG: doi_dev-6-0-1-1
+DATE: 10/11/2015
+STAFF: lnh
+CHANGES: Changed path to jboss, host, and compile directory in build.properties
+         Changed javac target from 1.5 to 1.7 in build.xml
+         Added Install script to deploy the product
+

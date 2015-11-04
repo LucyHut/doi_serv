@@ -1,0 +1,19 @@
+#!/bin/sh
+
+echo "Deploying the service: ant deploy"
+antpath=`which ant`
+if echo "$antpath" | grep "not found">/dev/null; then
+   echo "Failed to deployed the service using ant utility - Anit not installed"
+   exit 1
+fi
+#cd to the the install directory and deploy the service
+cd `dirname $0`
+$antpath deploy
+
+if [ $? -ne 0 ]
+then
+  echo "ant deploy failed $!"
+  exit 1
+fi
+echo "doi deployed successfully"
+exit 0

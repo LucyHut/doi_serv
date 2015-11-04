@@ -1,0 +1,44 @@
+<project name="doi" default="war" basedir=".">
+
+        <!--pull in values from the properties file -->
+        <property file="build.properties"/>
+	
+	    <path id="libs">
+	            <fileset includes="*.jar" dir="${jbossLib.dir}" />
+	    </path>
+
+        <!--clean -->
+        <target name="clean">
+                <delete dir="${compile.dir}"/>
+                <delete file="${project.name}.war"/>
+        </target>
+
+        <!--prepare -->
+        <target name="prepare" depends="clean">
+                <echo>Creating build directory</echo>
+                <mkdir dir="${compile.dir}"/>
+        </target>
+
+        <!--compile -->
+        <target name="compile" depends="prepare">
+                <echo>Compile source</echo>
+                <javac target="1.7" srcdir="${src.dir}" destdir="${compile.dir}">
+                        <classpath refid="libs"/>
+                </javac>
+        </target>
+
+        <!--war -->
+        <target name="war" depends="compile">
+                <echo>Build war file</echo>
+                <war destfile="${project.name}.war" webxml="war/WEB-INF/web.xml">
+                        <fileset dir="war"/>
+                </war>
+        </target>
+
+        <!--deploy -->
+        <target name="deploy" depends="war">
+                <echo>Deploy war</echo>
+                <copy file="${project.name}.war" todir="${deploy.dir}" overwrite="true"/>
+        </target>        
+
+</project>
